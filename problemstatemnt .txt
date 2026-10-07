@@ -1,0 +1,52 @@
+BUSINESS PROBLEM STATEMENT
+==========================
+
+## Background
+
+The company has identified a gap in its understanding of customer demographics,
+particularly the gender distribution of its customer base and how it may
+influence product purchases.
+
+Customer data is stored in an on-premises SQL database. Key stakeholders have
+requested a comprehensive KPI dashboard to make these insights easier to
+understand.
+
+## Dashboard Requirements
+
+The dashboard should provide:
+
+- Sales by gender and product category
+- Total products sold
+- Total sales revenue
+- A clear breakdown of customers by gender
+
+## Filters and Date Queries
+
+Users should be able to:
+
+- Filter results by product category
+- Filter results by gender
+- Query data by date through a user-friendly interface
+
+## Proposed Data Architecture
+
+The solution will use the following data flow:
+
+1. **Source:** Customer and sales data is stored in the on-premises SQL database.
+2. **Ingestion:** Azure Data Factory moves data from the on-premises database
+	into Azure Data Lake.
+3. **Data processing:** Azure Databricks transforms and refines the data using
+	the medallion architecture:
+	- **Bronze:** Raw data ingested from the source
+	- **Silver:** Cleaned, validated, and standardized data
+	- **Gold:** Curated data prepared for reporting and analysis
+4. **Analytics:** Azure Synapse Analytics provides access to the prepared Gold
+	data for analytical queries.
+5. **Reporting:** Power BI connects to the analytics layer to present the KPI
+	dashboard and interactive filters.
+
+### Security and Governance
+
+- **Azure Active Directory** manages identity and access to the solution.
+- **Azure Key Vault** securely stores credentials, keys, and other secrets used
+  by the data pipelines and services.
